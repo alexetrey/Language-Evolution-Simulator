@@ -1,7 +1,3 @@
-"""
-Personal Sleep Pattern Anomaly Detector - Advice Engine
-AI-powered personalized sleep improvement recommendations
-"""
 
 import pandas as pd
 import numpy as np
@@ -380,4 +376,3 @@ class SleepAdvisor:
         
         print(f"Sleep advice report exported to {filename}")
 
-# Production module - no test code needed

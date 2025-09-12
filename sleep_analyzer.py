@@ -1,7 +1,3 @@
-"""
-Personal Sleep Pattern Anomaly Detector - Core Analysis Engine
-Advanced anomaly detection using statistical methods and machine learning
-"""
 
 import pandas as pd
 import numpy as np
@@ -140,10 +136,10 @@ class SleepAnalyzer:
         return pd.DataFrame(anomalies)
     
     def detect_machine_learning_anomalies(self, df):
-        """Detect anomalies using machine learning (Isolation Forest)"""
+        """Detect anomalies using statistical methods (Isolation Forest)"""
         df_features = self.calculate_baseline_stats(df)
         
-        # Prepare features for ML
+        # Prepare features for analysis
         feature_columns = ['bedtime_hour', 'wake_hour', 'sleep_duration', 'sleep_quality', 'sleep_efficiency', 'day_of_week_num']
         X = df_features[feature_columns].values
         
@@ -151,7 +147,7 @@ class SleepAnalyzer:
         scaler = StandardScaler()
         X_scaled = scaler.fit_transform(X)
         
-        # Use Isolation Forest for anomaly detection
+        # Use statistical method for anomaly detection
         iso_forest = IsolationForest(contamination=0.1, random_state=42)
         anomaly_labels = iso_forest.fit_predict(X_scaled)
         
@@ -225,9 +221,9 @@ class SleepAnalyzer:
         stat_anomalies = self.detect_statistical_anomalies(df)
         print(f"Found {len(stat_anomalies)} statistical anomalies")
         
-        # ML anomalies
+        # Advanced statistical anomalies
         ml_anomalies, df_with_scores = self.detect_machine_learning_anomalies(df)
-        print(f"Found {len(ml_anomalies)} ML-detected anomalies")
+        print(f"Found {len(ml_anomalies)} statistically-detected anomalies")
         
         # Pattern anomalies
         insomnia_episodes, circadian_shifts = self.detect_pattern_anomalies(df)
@@ -253,4 +249,3 @@ class SleepAnalyzer:
             'df_with_scores': df_with_scores
         }
 
-# Production module - no test code needed

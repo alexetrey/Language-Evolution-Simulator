@@ -1,7 +1,3 @@
-"""
-Personal Sleep Pattern Anomaly Detector - Visualization Engine
-Creates professional charts and interactive dashboards for sleep analysis
-"""
 
 import pandas as pd
 import numpy as np
@@ -395,4 +391,3 @@ class SleepVisualizer:
         health_score = (duration_score * 0.4 + quality_score * 0.4 + efficiency_score * 0.2) - anomaly_penalty
         return max(0, min(100, health_score))
 
-# Production module - no test code needed

@@ -1,7 +1,3 @@
-"""
-Personal Sleep Pattern Anomaly Detector - Command Line Interface
-Production-ready CLI for automated sleep analysis and reporting
-"""
 
 import argparse
 import sys
@@ -42,6 +38,15 @@ class CLISleepAnalyzer:
         """Load sleep data from CSV file"""
         try:
             data = pd.read_csv(file_path)
+            
+            # Add datetime columns if they don't exist
+            if 'bedtime_dt' not in data.columns:
+                data['bedtime_dt'] = pd.to_datetime(data['date'] + ' ' + data['bedtime'])
+            if 'wake_time_dt' not in data.columns:
+                data['wake_time_dt'] = pd.to_datetime(data['date'] + ' ' + data['wake_time'])
+            if 'day_of_week' not in data.columns:
+                data['day_of_week'] = pd.to_datetime(data['date']).dt.day_name()
+            
             print(f"Loaded {len(data)} days of sleep data from: {file_path}")
             return data
         except Exception as e:

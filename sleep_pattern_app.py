@@ -1,7 +1,3 @@
-"""
-Personal Sleep Pattern Anomaly Detector - Enhanced GUI Application
-Modern, user-friendly interface with custom styling and improved UX
-"""
 
 import tkinter as tk
 from tkinter import ttk, messagebox, filedialog
@@ -23,7 +19,7 @@ from sleep_advisor import SleepAdvisor
 class ModernSleepPatternApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("🌙 Personal Sleep Pattern Anomaly Detector")
+        self.root.title("Sleep Pattern Analyzer")
         self.root.geometry("1400x900")
         
         # Modern color scheme
@@ -84,7 +80,7 @@ class ModernSleepPatternApp:
         # Title
         title_label = tk.Label(
             header_frame, 
-            text="🌙 Personal Sleep Pattern Anomaly Detector",
+            text="Sleep Pattern Analyzer",
             font=('Segoe UI', 24, 'bold'),
             fg='white',
             bg=self.colors['primary']
@@ -94,7 +90,7 @@ class ModernSleepPatternApp:
         # Subtitle
         subtitle_label = tk.Label(
             header_frame,
-            text="Advanced Sleep Analysis & Personalized Recommendations",
+            text="Analyze Sleep Patterns & Get Recommendations",
             font=('Segoe UI', 12),
             fg='#BDC3C7',
             bg=self.colors['primary']
@@ -126,7 +122,7 @@ class ModernSleepPatternApp:
         # Generate sample data
         generate_btn = self.create_modern_button(
             data_card, 
-            "🎲 Generate Sample Data", 
+            "Generate Sample Data", 
             self.generate_sample_data,
             self.colors['secondary']
         )
@@ -135,7 +131,7 @@ class ModernSleepPatternApp:
         # Load CSV file
         load_btn = self.create_modern_button(
             data_card,
-            "📁 Load CSV File",
+            "Load CSV File",
             self.load_csv_file,
             self.colors['success']
         )
@@ -157,7 +153,7 @@ class ModernSleepPatternApp:
         
         self.analyze_btn = self.create_modern_button(
             analysis_card,
-            "⚡ Analyze Sleep Patterns",
+            "Analyze Sleep Patterns",
             self.analyze_sleep_data,
             self.colors['accent']
         )
@@ -465,6 +461,15 @@ class ModernSleepPatternApp:
         if file_path:
             try:
                 self.sleep_data = pd.read_csv(file_path)
+                
+                # Add datetime columns if they don't exist
+                if 'bedtime_dt' not in self.sleep_data.columns:
+                    self.sleep_data['bedtime_dt'] = pd.to_datetime(self.sleep_data['date'] + ' ' + self.sleep_data['bedtime'])
+                if 'wake_time_dt' not in self.sleep_data.columns:
+                    self.sleep_data['wake_time_dt'] = pd.to_datetime(self.sleep_data['date'] + ' ' + self.sleep_data['wake_time'])
+                if 'day_of_week' not in self.sleep_data.columns:
+                    self.sleep_data['day_of_week'] = pd.to_datetime(self.sleep_data['date']).dt.day_name()
+                
                 self.status_var.set(f"✅ Loaded {len(self.sleep_data)} days of data from {os.path.basename(file_path)}")
                 self.analyze_btn.config(state='normal')
                 self.update_data_info()

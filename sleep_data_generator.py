@@ -1,7 +1,3 @@
-"""
-Personal Sleep Pattern Anomaly Detector - Data Generator
-Generates realistic synthetic sleep data for testing and demonstration
-"""
 
 import pandas as pd
 import numpy as np
@@ -149,4 +145,3 @@ class SleepDataGenerator:
         
         return df
 
-# Production module - no test code needed
