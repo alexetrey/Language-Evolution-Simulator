@@ -36,12 +36,6 @@ ENV/
 Thumbs.db
 
 # Project specific
-*.csv
 *.png
-*.html
-*.txt
-interactive_dashboard_*.html
-sample_sleep_data.csv
-test_sleep_data.csv
-demo_sleep_*.csv
-demo_sleep_*.txt
+*.json
+!requirements.txt
